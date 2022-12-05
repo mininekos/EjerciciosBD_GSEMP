@@ -137,6 +137,21 @@ def eliminarProfesor():
     try:
         bd = connect("BDEjercicio1.db")
         cursor = bd.cursor()
+
+        # Listar los profesores
+        sentencia = "SELECT * FROM profesor;"
+        cursor.execute(sentencia)
+        empleados = cursor.fetchall()
+
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", ""))
+        print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format("id_P", "NIf_P", "nombre", "especialidad", "tlf"))
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", ""))
+
+        for id_P, NIf_P, nombre, especialidad, tlf in empleados:
+            print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(id_P, NIf_P, nombre, especialidad, tlf))
+
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", ""))
+
         idProfe=input("\nId a eliminar: ")
         sentencia= "DELETE FROM profesor WHERE id_P=?"
         cursor.execute(sentencia,[idProfe])

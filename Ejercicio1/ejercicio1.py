@@ -12,5 +12,5 @@ from conecionBD import *
 #insertarProfesor()
 
 #Eliminar
-#eliminarProfesor()
+eliminarProfesor()
 

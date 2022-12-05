@@ -1,12 +1,17 @@
 from sqlite3 import *
 from conecionBD import *
 
+DESPEDIR=3
+CONTRATAR=8
+
 #Crear BBDD
 #crearBD()
 
 #Insertar datos iniciales
 #insertarDatos()
 
-#eliminarEmpleado()
+for i in range(DESPEDIR):
+    eliminarEmpleado()
 
-insertarEmpleado()
+for i in range(CONTRATAR):
+    insertarEmpleado()
