@@ -34,21 +34,46 @@ def insertarEmpleado(nombre,apellido,sueldo_base,AFAP,fecha_ingreso,num_hijos):
         bd.commit()  # Guardamos los cambios al terminar el ciclo
         print("Datos insertados correctamente")
         """
-        sentencia = "SELECT * FROM empleado;"
-        cursor.execute(sentencia)
-        empleados = cursor.fetchall()
-        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("","", "", "", "", "", ""))
-        print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format("id_E","nombre","apellido",
-                                                                   "sueldo_base","AFAP","fecha_ingreso","num_hijos"))
-        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", "", "",""))
-
-        for id_E, nombre, apellido, sueldo_base, AFAP, fecha_ingreso,num_hijos in empleados:
-            print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(id_E, nombre, apellido,
-                                                                       sueldo_base, AFAP, fecha_ingreso,num_hijos))
-
-        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", "", "",""))
+       
         """
     except OperationalError as error:
         print("Error al abrir:", error)
     finally:
         cursor.close()
+
+def mostrarEmpleados():
+    try:
+        bd = connect("BDEjercicio3.db")
+        cursor = bd.cursor()
+        sentencia = "SELECT * FROM empleado;"
+        cursor.execute(sentencia)
+        empleados = cursor.fetchall()
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", "", "", ""))
+        print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format("id_E", "nombre", "apellido",
+                                                                          "sueldo_base", "AFAP", "fecha_ingreso",
+                                                                          "num_hijos"))
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", "", "", ""))
+
+        for id_E, nombre, apellido, sueldo_base, AFAP, fecha_ingreso, num_hijos in empleados:
+            print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(id_E, nombre, apellido,
+                                                                              sueldo_base, AFAP, fecha_ingreso,
+                                                                              num_hijos))
+
+        print("+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+{:-<20}+".format("", "", "", "", "", "", ""))
+    except:
+        print("Error")
+    finally:
+            cursor.close()
+
+def getEmpleado(id):
+    try:
+        bd = connect("BDEjercicio3.db")
+        cursor = bd.cursor()
+        sentencia = "SELECT * FROM empleado where id_E=?;"
+        cursor.execute(sentencia,[id])
+        empleado = cursor.fetchone()
+        return empleado
+    except:
+        print("Error")
+    finally:
+            cursor.close()
